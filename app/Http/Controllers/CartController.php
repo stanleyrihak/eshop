@@ -34,8 +34,6 @@ class CartController extends Controller
     {
         $data = $request->input('products', []);
 
-        dd($request->all());
-
         $newCart = [];
 
         foreach ($data as $item) {

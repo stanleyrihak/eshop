@@ -53,12 +53,20 @@
                                 <div class="col-md-6">
                                     <label for="c_fname" class="text-black">First Name <span
                                             class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="c_fname" name="first_name" value="{{ old('first_name', auth()->user()?->name) }}">
+                                    <input type="text" class="form-control" id="c_fname" name="first_name"
+                                           value="{{ old('first_name') }}">
+                                    @error('first_name')
+                                    <span class="text-red-500">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="col-md-6">
                                     <label for="c_lname" class="text-black">Last Name <span
                                             class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="c_lname" name="last_name">
+                                    <input type="text" class="form-control" id="c_lname" name="last_name"
+                                           value="{{ old('first_name') }}">
+                                    @error('last_name')
+                                    <span class="text-red-500">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -66,6 +74,9 @@
                                 <div class="col-md-12">
                                     <label for="c_companyname" class="text-black">Company Name </label>
                                     <input type="text" class="form-control" id="c_companyname" name="company_name">
+                                    @error('company_name')
+                                    <span class="text-red-500">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -75,38 +86,60 @@
                                             class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="c_address" name="address"
                                            placeholder="Street address">
+                                    @error('address')
+                                    <span class="text-red-500">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
 
                             <div class="form-group mt-3">
-                                <input type="text" class="form-control" name="accommodation"
+                                <label for="c_accomodation" class="text-black">Accomodation <span
+                                        class="text-danger"></span></label>
+                                <input type="text" class="form-control" id="c_accomodation" name="accommodation"
                                        placeholder="Apartment, suite, unit etc. (optional)">
+                                @error('accommodation')
+                                <span class="text-red-500">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="form-group row">
                                 <div class="col-md-6">
                                     <label for="c_state_country" class="text-black">City<span
-                                            class="text-danger">*</span></label>
+                                            class="text-danger"> *</span></label>
                                     <input type="text" class="form-control" id="c_state_country" name="city">
+                                    @error('city')
+                                    <span class="text-red-500">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="col-md-6">
                                     <label for="c_postal_zip" class="text-black">Postal Code / Zip <span
                                             class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="c_postal_zip" name="postal-or-zip">
+                                    <input type="text" class="form-control" id="c_postal_zip" name="postal_or_zip">
+                                    @error('postal_or_zip')
+                                    <span class="text-red-500">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
 
                             <div class="form-group row mb-5">
                                 <div class="col-md-6">
                                     <label for="c_email_address" class="text-black">Email Address<span
-                                            class="text-danger">*</span></label>
-                                    <input type="email" class="form-control" id="c_email_address" name="email" value="{{ old('email', auth()->user()?->email) }}">
+                                            class="text-danger"> *</span></label>
+                                    <input type="email" class="form-control" id="c_email_address" name="email"
+                                           value="{{ old('email', auth()->user()?->email) }}">
+                                    @error('email')
+                                    <span class="text-red-500">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="col-md-6">
                                     <label for="c_phone" class="text-black">Phone <span
                                             class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="c_phone" name="phone"
+                                           value="{{ old('phone') }}"
                                            placeholder="Phone Number">
+                                    @error('phone')
+                                    <span class="text-red-500">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -233,9 +266,13 @@
 
                             <div class="form-group">
                                 <label for="c_order_notes" class="text-black">Order Notes</label>
-                                <textarea name="order-notes" id="c_order_notes" cols="30" rows="5"
+                                <textarea name="order_notes" id="c_order_notes" cols="30" rows="5"
                                           class="form-control"
+                                          value="{{ old('order_notes') }}"
                                           placeholder="Write your notes here..."></textarea>
+                                @error('order_notes')
+                                <span class="text-red-500">{{ $message }}</span>
+                                @enderror
                             </div>
 
                         </div>
@@ -253,6 +290,9 @@
                                         <input name="coupon" type="text" class="form-control me-2" id="c_code"
                                                placeholder="Coupon Code"
                                                aria-label="Coupon Code" aria-describedby="button-addon2">
+                                        @error('coupon')
+                                        <span class="text-red-500">{{ $message }}</span>
+                                        @enderror
                                         <div class="input-group-append">
                                             <button class="btn btn-black btn-sm" type="button" id="button-addon2">Apply
                                             </button>
@@ -276,18 +316,22 @@
                                         <tbody>
                                         @foreach($items as $item)
                                             <tr>
-                                                <td>{{$item->name}} <span class="mx-1 text-muted" style="font-size: 10px">X</span> {{$item->quantity}}</td>
+                                                <td>{{$item->name}} <span class="mx-1 text-muted"
+                                                                          style="font-size: 10px">X</span> {{$item->quantity}}
+                                                </td>
                                                 <td>${{$item->price}}</td>
                                                 <td>${{$item->price * $item ->quantity}}</td>
                                             </tr>
                                         @endforeach
                                         <tr>
-                                            <td colspan="2" class="text-black font-weight-bold"><strong>Cart Subtotal</strong></td>
+                                            <td colspan="2" class="text-black font-weight-bold"><strong>Cart
+                                                    Subtotal</strong></td>
                                             <td class="text-black">
                                                 ${{app(App\Services\CartService::class)->getSubtotalPrice()}}</td>
                                         </tr>
                                         <tr>
-                                            <td colspan="2" class="text-black font-weight-bold"><strong>Order Total</strong></td>
+                                            <td colspan="2" class="text-black font-weight-bold"><strong>Order
+                                                    Total</strong></td>
                                             <td class="text-black font-weight-bold">
                                                 <strong>${{app(App\Services\CartService::class)->getSubtotalPrice()}}</strong>
                                             </td>

@@ -57,10 +57,9 @@ Route::get('/product/{product_id}/add-to-cart', function (Request $request, $id)
 Route::get('/checkout', function () {
 
 
-
     $cart = session()->get('cart', []);
 
-    if(empty($cart)){
+    if (empty($cart)) {
         return redirect(\route('cart.index'))->withErrors(['errorMessage' => 'Your kočar is empty']);
     }
 
@@ -79,9 +78,7 @@ Route::get('/checkout', function () {
 
     return view('checkout', ['items' => $items]);
 })->name('checkout');
-Route::post('/checkout', function (Request $request) {
-    dd($request->all());
-})->name('checkout.store');
+Route::post('/checkout', [\App\Http\Controllers\OrderController::class, 'store'])->name('checkout.store');
 
 Route::get('/cart', [\App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
 Route::post('/cart', [\App\Http\Controllers\CartController::class, 'updateCart'])->name('cart.update-cart');
