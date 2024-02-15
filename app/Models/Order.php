@@ -21,5 +21,7 @@ class Order extends Model
         'order_notes',
         'coupon',
         'postal_or_zip',
+        'order',
+        'total'
     ];
 }

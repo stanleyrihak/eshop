@@ -50,7 +50,7 @@
 @foreach($products as $product)
     <div><img src="{{asset($product->image_path)}}" alt=""></div>
     <div><span>{{$product->name}}</span></div>
-    <div><span>{{}}</span></div>
+    <div><span>{{$product->price}}</span></div>
 @endforeach
 </body>
 </html>

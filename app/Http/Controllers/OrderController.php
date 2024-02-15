@@ -4,10 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Mail\OrderConfirmation;
 use App\Models\Order;
+use App\Services\CartService;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+
+    public function __construct(private CartService $cartService)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -42,10 +48,12 @@ class OrderController extends Controller
             'postal_or_zip' => ['required', 'numeric'],
         ]);
 
-        Order::create($order);
 
-        dd(\Mail::to(auth()->user()->email)->send(new OrderConfirmation()));
-        \Mail::to(auth()->user()->email)->send(new OrderConfirmation());
+        $newOrder = Order::create(array_merge($order, [
+            'total' => $this->cartService->getSubtotalPrice(),
+        ]));
+
+        \Mail::to(auth()->user()->email)->send(new OrderConfirmation($newOrder));
 
         return redirect(route('thank-you'));
     }

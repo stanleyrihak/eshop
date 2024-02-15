@@ -22,6 +22,7 @@ return new class extends Migration {
             $table->string('postal_or_zip');
             $table->string('phone');
             $table->text('order_notes')->nullable();
+            $table->decimal('total');
             $table->timestamps();
         });
     }

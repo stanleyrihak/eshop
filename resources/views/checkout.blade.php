@@ -388,9 +388,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <button class="btn btn-black btn-lg py-3 btn-block"
-                                                onclick="window.location='thankyou.html'">Place Order
-                                        </button>
+                                        <button class="btn btn-black btn-lg py-3 btn-block">Place Order</button>
                                     </div>
 
                                 </div>
